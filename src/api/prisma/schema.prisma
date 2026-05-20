@@ -1,0 +1,43 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Driver {
+  id        String   @id @default(uuid())
+  name      String
+  state     String
+  team      String
+  points    Int      @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model News {
+  id        String   @id @default(uuid())
+  image     String
+  title     String
+  text      String
+  url       String?
+  tag       String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id        String   @id @default(uuid())
+  name      String
+  image     String
+  price     Float
+  tag       String
+  model     String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

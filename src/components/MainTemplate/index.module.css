@@ -1,0 +1,18 @@
+.mainTemplate {
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+
+}
+
+footer {
+    margin-top: auto;
+}
+
+
+@media only screen and (min-width: 1025px) {
+    .mainTemplateContent {
+        padding: 0 0 4rem 0;
+    }
+
+}
