@@ -4,7 +4,7 @@ import styles from "./index.module.css";
 export default function Navlinks() {
   return (
     <>
-      <ul className="row gap-1">
+      <ul className="flex gap-2">
         <li>
           <NavLink to="/" end className={styles.navLink}>
             Início

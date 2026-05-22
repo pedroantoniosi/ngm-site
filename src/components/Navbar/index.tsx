@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <nav className={`${styles.navbarContainer}`}>
       <Container>
-        <div className="row align-center gap-1">
+        <div className="flex align-center gap-2">
           <NavLink to="/" end>
             <img src="/src/assets/img/logo.png" alt="Logo" width="100" />
           </NavLink>

@@ -6,6 +6,7 @@ img {
 
 
 
+
 .kitsContainer {
     display: flex;
     flex-direction: column;
@@ -55,6 +56,13 @@ img {
             display: grid;
             grid-template-columns: 12fr 8fr;
         }
+    }
+
+
+    .newsContent {
+        display: grid;
+        grid-template-columns: 12fr 8fr;
+        gap: 1rem;
     }
 
     .kitsContainer {
