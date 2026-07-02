@@ -14,7 +14,7 @@ router.post("/products", async (req: Request, res: Response) => {
   }
 
   try {
-    const product = await prisma.product.create({
+    const product = await prisma.products.create({
       data: {
         name,
         image: image || "",

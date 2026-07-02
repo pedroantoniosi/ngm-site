@@ -5,7 +5,10 @@ img {
 }
 
 
-
+.newsContent {
+    display: grid;
+    gap: .5rem;
+}
 
 .kitsContainer {
     display: flex;
@@ -60,9 +63,9 @@ img {
 
 
     .newsContent {
+        width: 100%;
         display: grid;
         grid-template-columns: 12fr 8fr;
-        gap: 1rem;
     }
 
     .kitsContainer {

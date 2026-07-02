@@ -1,28 +1,66 @@
-import { getDrivers } from "@/api/Drivers";
+interface Drivers {
+  id: string;
+  name: string;
+  state: string;
+  team: string;
+  points: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
-type DriverStandingsProps = {
-  limit?: number;
-};
+interface StandingsProps {
+  items: Drivers[];
+  variant?: "standingsHome" | "standingsPage";
+}
 
-const DriverStandings = ({ limit }: DriverStandingsProps) => {
-  const drivers = getDrivers();
-
-  const sortedDrivers = drivers.sort((a, b) => b.pts - a.pts);
-  const visibleDrivers = limit ? sortedDrivers.slice(0, limit) : sortedDrivers;
+export default function Standings({
+  items,
+  variant = "standingsHome",
+}: StandingsProps) {
+  const driversToRender =
+    variant === "standingsHome" ? items.slice(0, 5) : items;
 
   return (
-    <>
-      {visibleDrivers.map((driver, index) => (
-        <tr key={driver.id}>
-          <td>{index + 1}</td>
-          <td>{driver.name}</td>
-          <td>{driver.state}</td>
-          <td>{driver.team}</td>
-          <td>{driver.pts}</td>
-        </tr>
-      ))}
-    </>
-  );
-};
+    <table
+      className={
+        variant === "standingsHome"
+          ? "bg-black w-full md:rounded-xl overflow-hidden"
+          : "w-full md:rounded-xl overflow-hidden"
+      }
+    >
+      <thead>
+        {" "}
+        <tr className="bord">
+          {" "}
+          <th className="px-2 py-4 text-start text-neutral-400 uppercase text-sm">
+            {" "}
+            Nome{" "}
+          </th>{" "}
+          <th className="px-2 py-4 text-start text-neutral-400 uppercase text-sm">
+            {" "}
+            Estado{" "}
+          </th>{" "}
+          <th className="px-2 py-4 text-start text-neutral-400 uppercase text-sm">
+            {" "}
+            Equipe{" "}
+          </th>{" "}
+          <th className="px-2 py-4 text-start text-neutral-400 uppercase text-sm">
+            {" "}
+            PTS{" "}
+          </th>{" "}
+        </tr>{" "}
+      </thead>
 
-export default DriverStandings;
+      <tbody>
+        {driversToRender.map((item) => (
+          <tr key={item.id} className="hover:bg-neutral-900">
+            <td className="p-2 font-semibold">{item.name}</td>
+            <td className="p-2 font-semibold">{item.state}</td>
+            <td className="p-2 font-semibold">{item.team}</td>
+            <td className="p-2 font-semibold">{item.points}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}

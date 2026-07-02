@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/drivers", async (_req: Request, res: Response) => {
   try {
-    const drivers = await prisma.driver.findMany({
+    const drivers = await prisma.drivers.findMany({
       orderBy: {
         id: "asc",
       },

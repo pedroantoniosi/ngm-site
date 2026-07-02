@@ -1,11 +1,11 @@
-const products = [
+const rawProducts = [
   // =======================
   // CAMISAS
   // =======================
   {
     id: 1,
     name: "Camisa Oficial",
-    image: "",
+    image: "/public/img/shop/camisas/shirt-oficial.webp",
     price: 89.99,
     tag: "camisas",
     model: "oficial",
@@ -13,7 +13,7 @@ const products = [
   {
     id: 2,
     name: "Camisa Alternativa",
-    image: "",
+    image: "/public/img/shop/camisas/shirt-alternative.webp",
     price: 79.99,
     tag: "camisas",
     model: "alternative",
@@ -25,7 +25,7 @@ const products = [
   {
     id: 3,
     name: "Boné Oficial",
-    image: "",
+    image: "/public/img/shop/bones/hat-oficial.webp",
     price: 89.99,
     tag: "bones",
     model: "oficial",
@@ -33,7 +33,7 @@ const products = [
   {
     id: 4,
     name: "Boné Alternativo",
-    image: "",
+    image: "/public/img/shop/bones/hat-alternative.webp",
     price: 79.99,
     tag: "bones",
     model: "alternative",
@@ -45,7 +45,7 @@ const products = [
   {
     id: 5,
     name: "Mochila Oficial",
-    image: "",
+    image: "/public/img/shop/acessorios/bag-oficial.webp",
     price: 89.99,
     tag: "acessorios",
     model: "oficial",
@@ -53,7 +53,7 @@ const products = [
   {
     id: 6,
     name: "Mochila Alternativa",
-    image: "",
+    image: "/public/img/shop/acessorios/bag-alternative.webp",
     price: 79.99,
     tag: "acessorios",
     model: "alternative",
@@ -61,7 +61,7 @@ const products = [
   {
     id: 7,
     name: "Bandeira Oficial",
-    image: "",
+    image: "/public/img/shop/acessorios/flag-oficial.webp",
     price: 79.99,
     tag: "acessorios",
     model: "oficial",
@@ -69,11 +69,11 @@ const products = [
   {
     id: 8,
     name: "Bandeira Alternativa",
-    image: "",
+    image: "/public/img/shop/acessorios/flag-alternative.webp",
     price: 79.99,
     tag: "acessorios",
     model: "alternative",
   },
 ];
 
-export default products;
+export default rawProducts;

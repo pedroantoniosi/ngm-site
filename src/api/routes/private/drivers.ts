@@ -14,7 +14,7 @@ router.post("/drivers", async (req: Request, res: Response) => {
   }
 
   try {
-    const driver = await prisma.driver.create({
+    const driver = await prisma.drivers.create({
       data: {
         name,
         state,

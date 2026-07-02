@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/products", async (_req: Request, res: Response) => {
   try {
-    const products = await prisma.product.findMany({
+    const products = await prisma.products.findMany({
       orderBy: {
         id: "asc",
       },

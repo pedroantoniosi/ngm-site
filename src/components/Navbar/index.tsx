@@ -1,20 +1,19 @@
 import Container from "../Container";
-import styles from "./index.module.css";
 import Navlinks from "../Navlinks";
 import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className={`${styles.navbarContainer}`}>
+    <nav className="py-[2rem] px-[1rem]">
       <Container>
-        <div className="flex align-center gap-2">
-          <NavLink to="/" end>
+        <div className="flex items-end flex-col md:flex-row md:items-center md:justify-between gap-2">
+          <NavLink to="/" end className="hidden md:flex">
             <img src="/src/assets/img/logo.png" alt="Logo" width="100" />
           </NavLink>
-          <div className="ms-auto">
+          <div className="">
             <Navlinks />
           </div>
-          <button className="hamburger d-none-md" aria-label="Open menu">
+          <button className="flex md:hidden" aria-label="Open menu">
             ☰
           </button>
         </div>

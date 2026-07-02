@@ -7,7 +7,7 @@ datasource db {
   provider = "postgresql"
 }
 
-model Driver {
+model Drivers {
   id        String   @id @default(uuid())
   name      String
   state     String
@@ -30,7 +30,7 @@ model News {
   updatedAt DateTime @updatedAt
 }
 
-model Product {
+model Products {
   id        String   @id @default(uuid())
   name      String
   image     String
