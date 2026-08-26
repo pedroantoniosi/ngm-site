@@ -1,6 +1,6 @@
 import MainTemplate from "@/components/MainTemplate";
 import Container from "@/components/Container";
-import NewsCard from "@/components/NewsCard";
+import NewsCard from "@/components/Card";
 
 import { useNews } from "@/hooks/useNews";
 

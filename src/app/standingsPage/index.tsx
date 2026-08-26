@@ -4,14 +4,14 @@ import Standings from "@/components/Standings";
 
 import { useDrivers } from "@/hooks/useDrivers";
 
-import "./index.css";
-
 export default function StandingsPage() {
   const { drivers } = useDrivers();
   return (
     <MainTemplate>
       <Container>
-        <Standings items={drivers} variant="standingsPage" />
+        <div className="bg-black rounded-2xl">
+          <Standings items={drivers} variant="standingsPage" />
+        </div>
       </Container>
     </MainTemplate>
   );

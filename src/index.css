@@ -1,29 +1,17 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  color: rgba(255, 255, 255, 0.87);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #00162B;
-}
-
-.bg-primary {
-  background-color: #00162B;
-}
-
-.color-light {
-  color: #fff;
-}
-
-.color-dark {
-  color: #000;
-}
-
 .ellipsis-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-}/*# sourceMappingURL=index.css.map */
+}
+
+.bg-navy {
+  background-color: navy;
+}
+
+.clip-header {
+  clip-path: polygon(0% 0%, 100% 0, 97% 100%, 0% 100%);
+}
+
+/*# sourceMappingURL=index.css.map */

@@ -32,7 +32,7 @@ function MainTemplate({ children }: MainTemplateProps) {
   }, []);
 
   return (
-    <div className={styles.mainTemplate}>
+    <div className={`bg-blue-800 text-white ${styles.mainTemplate}`}>
       {isMobile ? <NavbarMobile /> : <Navbar />}
 
       <main className={styles.mainTemplateContent}>{children}</main>

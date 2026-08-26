@@ -5,8 +5,8 @@ import { NavLink } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className={styles.footerContainer}>
-      <Container className="text-white">
+    <footer className="bg-black">
+      <Container className=" text-white">
         <TemplateAuto mode="auto-fit" minWidth="300px" gap="2rem">
           {/* Media */}
           <div>
