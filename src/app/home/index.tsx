@@ -73,14 +73,14 @@ const car = [
     name: "NGM",
     model: "27",
     year: "2027",
-    image: "/public/img/car.webp",
+    image: "/img/car.webp",
   },
 ];
 
 // Hooks
 import { useNews } from "@/hooks/useNews";
 import { useDrivers } from "@/hooks/useDrivers";
-import Button from "@/components/button";
+import Button from "@/components/Button";
 
 interface Products {
   id: string;
