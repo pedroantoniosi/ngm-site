@@ -4,7 +4,7 @@ import MainTemplate from "@/components/MainTemplate";
 import Container from "@/components/Container";
 import Card from "@/components/Card";
 import Standings from "@/components/Standings";
-import PartnerLogo, { partners } from "@/components/Partners";
+import PartnerLogo from "@/components/Partners";
 import Header from "@/components/Header";
 import Button from "@/components/Button";
 
@@ -55,16 +55,16 @@ const ngmDrivers: ngmDriversProps[] = [
     name: "Pietro Fit",
     number: 22,
     state: "RJ",
-    image: "/public/img/drivers/driver-1.png",
-    wallpaper: "/public/img/drivers/w-driver-1.png",
+    image: "/img/drivers/driver-1.png",
+    wallpaper: "/img/drivers/w-driver-1.png",
   },
   {
     id: 1,
     name: "Giovane Barbosa",
     number: 33,
     state: "AC",
-    image: "/public/img/drivers/driver-2.png",
-    wallpaper: "/public/img/drivers/w-driver-2.png",
+    image: "/img/drivers/driver-2.png",
+    wallpaper: "/img/drivers/w-driver-2.png",
   },
 ];
 
@@ -149,7 +149,7 @@ export default function Home() {
               <div className="flex items-end">
                 <div className="card overflow-hidden">
                   <img
-                    src="/public/img/race-week.webp"
+                    src="/img/race-week.webp"
                     alt=""
                     className="rounded-lg aspect-video object-cover hover:scale-[1.1] duration-[.3s]"
                   />
@@ -162,7 +162,7 @@ export default function Home() {
               <div className="flex items-end">
                 <div className="card overflow-hidden">
                   <img
-                    src="/public/img/galeria.webp"
+                    src="/img/galeria.webp"
                     alt=""
                     className="rounded-lg aspect-video object-cover hover:scale-[1.1] duration-[.3s]"
                   />
@@ -275,19 +275,10 @@ export default function Home() {
         </section>
       </div>
       {/* Parceiros */}
-      <section className="flex items-center min-h-svh  bg-zinc-900">
-        <Container className="flex justify-center flex-col gap-2 max-w-[1024px] mx-auto">
-          <a href="" className="mx-auto h-[130px] md:h-[200px]">
-            <img
-              src="/public/img/logo.png"
-              alt=""
-              className="w-[280px] md:w-[400px]"
-            />
-          </a>
+      <section className="flex items-center min-h-[80svh] bg-zinc-950">
+        <Container className="">
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 md:gap-8 px-4">
-            {partners.map((partner) => (
-              <PartnerLogo key={partner.name} partner={partner} />
-            ))}
+            <PartnerLogo />
           </div>
         </Container>
       </section>

@@ -25,7 +25,7 @@ const variants = {
 
   news: {
     article: "relative flex flex-col bg-zinc-950 rounded-2xl overflow-hidden",
-    caption: "z-[10] py-4 px-2",
+    caption: "fex flex-col z-[10] py-4 px-2",
     image: "aspect-[16/10] object-cover md:w-100",
     title: "text-sm md:text-md font-bold",
   },
