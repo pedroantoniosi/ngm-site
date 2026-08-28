@@ -1,10 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
 import Footer from "../Footer";
 import Navbar from "../Navbar";
-import NavbarMobile from "../NavbarMobile";
 
 import styles from "./index.module.css";
 
@@ -13,27 +10,9 @@ type MainTemplateProps = {
 };
 
 function MainTemplate({ children }: MainTemplateProps) {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const media = window.matchMedia("(max-width: 768px)");
-
-    const update = () => {
-      setIsMobile(media.matches);
-    };
-
-    update();
-
-    media.addEventListener("change", update);
-
-    return () => {
-      media.removeEventListener("change", update);
-    };
-  }, []);
-
   return (
     <div className={`bg-blue-800 text-white ${styles.mainTemplate}`}>
-      {isMobile ? <NavbarMobile /> : <Navbar />}
+      <Navbar />
 
       <main className={styles.mainTemplateContent}>{children}</main>
 

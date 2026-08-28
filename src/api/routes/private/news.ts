@@ -5,9 +5,9 @@ import { prisma } from "../../lib/prisma";
 const router = express.Router();
 
 router.post("/news", async (req: Request, res: Response) => {
-  const { img, title, text, url, tag } = req.body;
+  const { image, title, text, url, tag } = req.body;
 
-  if (!img || !title || !text || !tag) {
+  if (!image || !title || !text || !tag) {
     return res.status(400).json({
       error: "img, title, text e tag são obrigatórios",
     });
@@ -16,7 +16,7 @@ router.post("/news", async (req: Request, res: Response) => {
   try {
     const news = await prisma.news.create({
       data: {
-        img,
+        image,
         title,
         text,
         url: url || "",

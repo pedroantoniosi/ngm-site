@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 //Componentes
 import MainTemplate from "@/components/MainTemplate";
 import Container from "@/components/Container";
@@ -7,14 +8,14 @@ import PartnerLogo, { partners } from "@/components/Partners";
 import Header from "@/components/Header";
 
 //Api
-interface Video {
+interface videoProps {
   id: number;
   title: string;
   description: string;
   url: string;
 }
 
-const videos: Video[] = [
+const videos: videoProps[] = [
   {
     id: 0,
     title: "VRC Formula Alpha 2025 - Teaser",
@@ -38,7 +39,16 @@ const videos: Video[] = [
   },
 ];
 
-const ngmDrivers = [
+interface ngmDriversProps {
+  id: number;
+  name: string;
+  number: number;
+  state: string;
+  image: string;
+  wallpaper: string;
+}
+
+const ngmDrivers: ngmDriversProps[] = [
   {
     id: 0,
     name: "Pietro Fit",
@@ -57,11 +67,20 @@ const ngmDrivers = [
   },
 ];
 
-// import SwiperNav from "@/components/SliderNavigation";
-import { useState, useEffect } from "react";
+const car = [
+  {
+    id: 0,
+    name: "NGM",
+    model: "27",
+    year: "2027",
+    image: "/public/img/car.webp",
+  },
+];
+
 // Hooks
 import { useNews } from "@/hooks/useNews";
 import { useDrivers } from "@/hooks/useDrivers";
+import Button from "@/components/button";
 
 interface Products {
   id: string;
@@ -97,7 +116,7 @@ export default function Home() {
   return (
     <MainTemplate>
       {/* Noticias */}
-      <section className="p-2 ">
+      <section>
         <Container>
           <div title="Ultimas Noticias">
             <div className="grid gap-6 md:grid-cols-2">
@@ -119,8 +138,8 @@ export default function Home() {
       </section>
 
       {/* Mais Informações */}
-      <div className="bg-navy">
-        <section className="min-h-[60svh] flex items-center p-2 ">
+      <div className="flex flex-col gap-2 bg-navy">
+        <section className="flex items-center">
           <Container className="grid lg:grid-cols-3 gap-6 justify-around">
             {/* Tabela de Pilotos */}
             <Standings items={drivers} variant="standingsHome" />
@@ -153,7 +172,7 @@ export default function Home() {
           </Container>
         </section>
         {/* Videos */}
-        <div className=" p-4">
+        <section className="">
           <Container>
             <Header title="Videos" />
             <div className="grid gap-4 md:grid-cols-[6fr_3fr_3fr]">
@@ -165,7 +184,7 @@ export default function Home() {
                     key={item.id}
                     className="flex h-full flex-col overflow-hidden rounded-xl bg-zinc-950"
                   >
-                    <div className="flex aspect-video w-full h-80 bg-red-500">
+                    <div className="flex aspect-video w-full h-80">
                       <iframe
                         className="h-full w-full"
                         src={`https://www.youtube.com/embed/${videoId}`}
@@ -189,17 +208,14 @@ export default function Home() {
               })}
             </div>
           </Container>
-        </div>
+        </section>
         {/* Pilotos */}
-        <section>
+        <section className="">
           <Container>
             <Header title="Pilotos" />
             <div className="grid md:grid-cols-2 gap-6">
               {ngmDrivers.map((item) => (
-                <div
-                  className="flex w-full bg-red-500 overflow-hidden"
-                  key={item.id}
-                >
+                <div className="flex w-full  overflow-hidden" key={item.id}>
                   <img
                     src={item.wallpaper}
                     className="w-full  object-cover"
@@ -210,54 +226,54 @@ export default function Home() {
             </div>
           </Container>
         </section>
-        {/* Carro 2026        */}
-        <section className="bg-black min-h-[80svh] md:h-svh flex  flex-col gap-4 justify-center items-center ">
-          <Container className="flex justify-center gap-2 items-center relative h-[400px]">
-            <h2 className="flex flex-col md:flex-row font-bold justify-center items-center  leading-[5rem] select-none no-drag">
-              <span className="text-blue-600 text-[30vw] md:text-[25rem]">
-                NGM
-              </span>
-              <span className="text-white text-[30vw] md:text-[25rem]">27</span>
+
+        {/* Carro 2027  */}
+        <section className="md:min-h-[50svh]  bg-black">
+          <Container className="flex flex-col">
+            <h2 className="text-center text-[25vw] lg:text-[18rem] font-bold">
+              NGM27
             </h2>
-            <img
-              src="/public/img/car.webp"
-              alt=""
-              className=" absolute bottom-[0] select-none no-drag"
-            />
-          </Container>
-          <Container className="flex">
-            <button className="mx-auto bg-blue-600 font-semibold p-2 rounded-full hover:bg-blue-700 cursor-pointer z-[2]">
-              Mais Detalhes
-            </button>
+            {car.map((item) => (
+              <div className="flex flex-col w-fuil h-full" key={item.id}>
+                <img
+                  src={item.image}
+                  alt=""
+                  className="block w-full max-w-270 mx-auto relative lg:top-[-150px]"
+                />
+              </div>
+            ))}
           </Container>
         </section>
-        {/* Shop */}
+
+        {/* Shopping */}
         <section className="">
-          <Container>
+          <Container className="flex flex-col gap-6">
             <Header title="Shopping" />
             <div className="grid gap-4 grid-cols-2 md:grid-cols-4 md:gap-[2rem]">
               {products
                 .sort((a, b) => a.name.localeCompare(b.name))
                 .map((item) => (
-                  <div className="card">
+                  <div className="bg-zinc-950 p-2 rounded-2xl">
                     <img
                       src={item.image}
                       alt={item.name}
                       className="aspect-square object-cover w-full"
                     />
-                    <div className="caption">
-                      <h2 className="text-xl font-bold">{item.name}</h2>
-                      <p className="font-semibold text-neutral-400">
+                    <div className="p-2">
+                      <h2 className="text-md text-zinc-200">{item.name}</h2>
+                      <p className="font-semibold  text-xl">
                         R$ <span>{item.price}</span>
                       </p>
                     </div>
                   </div>
                 ))}
             </div>
+            <Button variant="secondary" className="mt-4 max-w-fit mx-auto">
+              Ver Todos Produtos
+            </Button>
           </Container>
         </section>
       </div>
-
       {/* Parceiros */}
       <section className="flex items-center min-h-svh  bg-zinc-900">
         <Container className="flex justify-center flex-col gap-2 max-w-[1024px] mx-auto">
