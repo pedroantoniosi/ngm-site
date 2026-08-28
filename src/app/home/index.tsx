@@ -6,6 +6,7 @@ import Card from "@/components/Card";
 import Standings from "@/components/Standings";
 import PartnerLogo, { partners } from "@/components/Partners";
 import Header from "@/components/Header";
+import Button from "@/components/Button";
 
 //Api
 interface videoProps {
@@ -80,7 +81,6 @@ const car = [
 // Hooks
 import { useNews } from "@/hooks/useNews";
 import { useDrivers } from "@/hooks/useDrivers";
-import Button from "@/components/Button";
 
 interface Products {
   id: string;
