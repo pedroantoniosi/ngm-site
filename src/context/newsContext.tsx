@@ -14,7 +14,7 @@ export function NewsProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     async function loadNews() {
       try {
-        const response = await fetch("http://localhost:3001/news");
+        const response = await fetch("https://ngm-api.onrender.com/news");
 
         const data = await response.json();
         console.log("NEWS API:", data);
