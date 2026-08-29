@@ -8,12 +8,15 @@ import App from "./App.tsx";
 
 import { NewsProvider } from "./context/newsContext";
 import { DriversProvider } from "./context/driversContext";
+import { ProductsProvider } from "./context/productsContext";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <NewsProvider>
       <DriversProvider>
-        <App />
+        <ProductsProvider>
+          <App />
+        </ProductsProvider>
       </DriversProvider>
     </NewsProvider>
   </StrictMode>,

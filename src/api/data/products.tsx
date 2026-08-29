@@ -5,7 +5,7 @@ const rawProducts = [
   {
     id: 1,
     name: "Camisa Oficial",
-    image: "/public/img/shop/camisas/shirt-oficial.webp",
+    image: "/img/shop/camisas/shirt-oficial.webp",
     price: 89.99,
     tag: "camisas",
     model: "oficial",
@@ -13,7 +13,7 @@ const rawProducts = [
   {
     id: 2,
     name: "Camisa Alternativa",
-    image: "/public/img/shop/camisas/shirt-alternative.webp",
+    image: "/img/shop/camisas/shirt-alternative.webp",
     price: 79.99,
     tag: "camisas",
     model: "alternative",
@@ -25,7 +25,7 @@ const rawProducts = [
   {
     id: 3,
     name: "Boné Oficial",
-    image: "/public/img/shop/bones/hat-oficial.webp",
+    image: "/img/shop/bones/hat-oficial.webp",
     price: 89.99,
     tag: "bones",
     model: "oficial",
@@ -33,7 +33,7 @@ const rawProducts = [
   {
     id: 4,
     name: "Boné Alternativo",
-    image: "/public/img/shop/bones/hat-alternative.webp",
+    image: "/img/shop/bones/hat-alternative.webp",
     price: 79.99,
     tag: "bones",
     model: "alternative",
@@ -45,7 +45,7 @@ const rawProducts = [
   {
     id: 5,
     name: "Mochila Oficial",
-    image: "/public/img/shop/acessorios/bag-oficial.webp",
+    image: "/img/shop/acessorios/bag-oficial.webp",
     price: 89.99,
     tag: "acessorios",
     model: "oficial",
@@ -53,7 +53,7 @@ const rawProducts = [
   {
     id: 6,
     name: "Mochila Alternativa",
-    image: "/public/img/shop/acessorios/bag-alternative.webp",
+    image: "/img/shop/acessorios/bag-alternative.webp",
     price: 79.99,
     tag: "acessorios",
     model: "alternative",
@@ -61,7 +61,7 @@ const rawProducts = [
   {
     id: 7,
     name: "Bandeira Oficial",
-    image: "/public/img/shop/acessorios/flag-oficial.webp",
+    image: "/img/shop/acessorios/flag-oficial.webp",
     price: 79.99,
     tag: "acessorios",
     model: "oficial",
@@ -69,7 +69,7 @@ const rawProducts = [
   {
     id: 8,
     name: "Bandeira Alternativa",
-    image: "/public/img/shop/acessorios/flag-alternative.webp",
+    image: "/img/shop/acessorios/flag-alternative.webp",
     price: 79.99,
     tag: "acessorios",
     model: "alternative",

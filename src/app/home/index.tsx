@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
-
-// Componentes
+// COMPONENTS
 import MainTemplate from "@/components/MainTemplate";
 import Container from "@/components/Container";
 import Card from "@/components/Card";
@@ -9,14 +7,12 @@ import PartnerLogo from "@/components/Partners";
 import Header from "@/components/Header";
 import Button from "@/components/Button";
 
-// Hooks
+// HOOKS
 import { useNews } from "@/hooks/useNews";
 import { useDrivers } from "@/hooks/useDrivers";
+import { useProducts } from "@/hooks/useProducts";
 
-// ===============================
 // VIDEOS
-// ===============================
-
 interface VideoProps {
   id: number;
   title: string;
@@ -48,10 +44,7 @@ const videos: VideoProps[] = [
   },
 ];
 
-// ===============================
 // NGM DRIVERS
-// ===============================
-
 interface NgmDriver {
   id: number;
   name: string;
@@ -80,9 +73,7 @@ const ngmDrivers: NgmDriver[] = [
   },
 ];
 
-// ===============================
-// CAR
-// ===============================
+// CARS
 
 const car = [
   {
@@ -94,51 +85,10 @@ const car = [
   },
 ];
 
-// ===============================
-// PRODUCTS
-// ===============================
-
-interface Product {
-  id: string;
-  name: string;
-  image: string;
-  price: number;
-  createdAt: string;
-  updatedAt: string;
-}
-
 export default function Home() {
   const { news } = useNews();
   const { drivers } = useDrivers();
-  console.log("DRIVERS NO HOME:", drivers);
-
-  const [products, setProducts] = useState<Product[]>([]);
-
-  // ===============================
-  // PRODUCTS API
-  // ===============================
-
-  useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/products`,
-        );
-
-        if (!response.ok) {
-          throw new Error("Erro ao buscar produtos");
-        }
-
-        const data: Product[] = await response.json();
-
-        setProducts(data);
-      } catch (error) {
-        console.error("Erro ao carregar produtos:", error);
-      }
-    }
-
-    fetchProducts();
-  }, []);
+  const { products } = useProducts();
 
   return (
     <MainTemplate>
@@ -286,7 +236,7 @@ export default function Home() {
             <Header title="Shopping" />
 
             <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-[2rem]">
-              {[...products]
+              {products
                 .sort((a, b) => a.name.localeCompare(b.name))
                 .map((item) => (
                   <div key={item.id} className="rounded-2xl bg-zinc-950 p-2">
@@ -300,7 +250,7 @@ export default function Home() {
                       <h2 className="text-md text-zinc-200">{item.name}</h2>
 
                       <p className="text-xl font-semibold">
-                        R$ <span>{item.price}</span>
+                        R$ {item.price.toFixed(2).replace(".", ",")}
                       </p>
                     </div>
                   </div>
