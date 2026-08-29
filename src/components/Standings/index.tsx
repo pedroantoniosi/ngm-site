@@ -1,15 +1,15 @@
-interface Drivers {
+interface Driver {
   id: string;
   name: string;
   state: string;
   team: string;
-  points: string;
+  points: number;
   createdAt: string;
   updatedAt: string;
 }
 
 interface StandingsProps {
-  items: Drivers[];
+  items: Driver[];
   variant?: "standingsHome" | "standingsPage";
 }
 
@@ -29,34 +29,34 @@ export default function Standings({
       }
     >
       <thead>
-        {" "}
-        <tr className="bord">
-          {" "}
+        <tr className="border-b border-neutral-800">
           <th className="px-2 py-4 text-start text-neutral-400 uppercase text-sm">
-            {" "}
-            Nome{" "}
-          </th>{" "}
+            Nome
+          </th>
+
           <th className="px-2 py-4 text-start text-neutral-400 uppercase text-sm">
-            {" "}
-            Estado{" "}
-          </th>{" "}
+            Estado
+          </th>
+
           <th className="px-2 py-4 text-start text-neutral-400 uppercase text-sm">
-            {" "}
-            Equipe{" "}
-          </th>{" "}
+            Equipe
+          </th>
+
           <th className="px-2 py-4 text-start text-neutral-400 uppercase text-sm">
-            {" "}
-            PTS{" "}
-          </th>{" "}
-        </tr>{" "}
+            PTS
+          </th>
+        </tr>
       </thead>
 
       <tbody>
         {driversToRender.map((item) => (
           <tr key={item.id} className="hover:bg-neutral-900">
             <td className="p-2 font-semibold">{item.name}</td>
+
             <td className="p-2 font-semibold">{item.state}</td>
+
             <td className="p-2 font-semibold">{item.team}</td>
+
             <td className="p-2 font-semibold">{item.points}</td>
           </tr>
         ))}

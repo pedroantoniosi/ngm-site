@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-//Componentes
+import { useEffect, useState } from "react";
+
+// Componentes
 import MainTemplate from "@/components/MainTemplate";
 import Container from "@/components/Container";
 import Card from "@/components/Card";
@@ -8,15 +9,22 @@ import PartnerLogo from "@/components/Partners";
 import Header from "@/components/Header";
 import Button from "@/components/Button";
 
-//Api
-interface videoProps {
+// Hooks
+import { useNews } from "@/hooks/useNews";
+import { useDrivers } from "@/hooks/useDrivers";
+
+// ===============================
+// VIDEOS
+// ===============================
+
+interface VideoProps {
   id: number;
   title: string;
   description: string;
   url: string;
 }
 
-const videos: videoProps[] = [
+const videos: VideoProps[] = [
   {
     id: 0,
     title: "VRC Formula Alpha 2025 - Teaser",
@@ -28,7 +36,7 @@ const videos: videoProps[] = [
     id: 1,
     title: "Race Sim Studio - GTM-Lanzo v8",
     description:
-      "O GT-M Lanzo V8 é o terceiro carro do nosso pacote GT-M Phase 3. Equipado com um motor V8 biturbo — uma novidade na linhagem Lanzo —, este carro apresenta as especificações mais completas para a temporada de 2026, incluindo sistemas exclusivos para auxiliar no equilíbrio de desempenho (BoP) específico da categoria, sistemas de energia e muito mais. Como sempre, o carro conta com uma ampla variedade de componentes configuráveis ​​à sua escolha, telas interativas e dinâmicas, e até mesmo uma animação especial nos faróis ao ligar ou desligar a ignição. A cor do brilho dos faróis também pode ser personalizada! Confira todos os detalhes em nosso site, abaixo. O pacote GT-M Championship Phase 3 também já está disponível no lançamento, uma vez que o escopo e a direção de desenvolvimento de todos os seis carros incluídos já foram definidos. O pacote contempla os modelos Cortex V8, Lux V8 Evo, Lanzo V8, Blackhorn V8, Toyama V8 e Nisumo V6, com os demais carros sendo lançados progressivamente ao longo dos próximos 12 meses.",
+      "O GT-M Lanzo V8 é o terceiro carro do nosso pacote GT-M Phase 3. Equipado com um motor V8 biturbo — uma novidade na linhagem Lanzo —, este carro apresenta as especificações mais completas para a temporada de 2026, incluindo sistemas exclusivos para auxiliar no equilíbrio de desempenho (BoP) específico da categoria, sistemas de energia e muito mais.",
     url: "https://www.youtube.com/watch?v=EAlv-WXp78U",
   },
   {
@@ -40,7 +48,11 @@ const videos: videoProps[] = [
   },
 ];
 
-interface ngmDriversProps {
+// ===============================
+// NGM DRIVERS
+// ===============================
+
+interface NgmDriver {
   id: number;
   name: string;
   number: number;
@@ -49,7 +61,7 @@ interface ngmDriversProps {
   wallpaper: string;
 }
 
-const ngmDrivers: ngmDriversProps[] = [
+const ngmDrivers: NgmDriver[] = [
   {
     id: 0,
     name: "Pietro Fit",
@@ -68,6 +80,10 @@ const ngmDrivers: ngmDriversProps[] = [
   },
 ];
 
+// ===============================
+// CAR
+// ===============================
+
 const car = [
   {
     id: 0,
@@ -78,11 +94,11 @@ const car = [
   },
 ];
 
-// Hooks
-import { useNews } from "@/hooks/useNews";
-import { useDrivers } from "@/hooks/useDrivers";
+// ===============================
+// PRODUCTS
+// ===============================
 
-interface Products {
+interface Product {
   id: string;
   name: string;
   image: string;
@@ -93,25 +109,36 @@ interface Products {
 
 export default function Home() {
   const { news } = useNews();
+  const { drivers } = useDrivers();
+  console.log("DRIVERS NO HOME:", drivers);
 
-  const [products, setProducts] = useState<Products[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
+
+  // ===============================
+  // PRODUCTS API
+  // ===============================
+
   useEffect(() => {
-    async function fetchDrivers() {
+    async function fetchProducts() {
       try {
-        const response = await fetch("http://localhost:3001/products");
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/products`,
+        );
 
-        const data = await response.json();
+        if (!response.ok) {
+          throw new Error("Erro ao buscar produtos");
+        }
+
+        const data: Product[] = await response.json();
 
         setProducts(data);
       } catch (error) {
-        console.error("Erro ao buscar pilotos:", error);
+        console.error("Erro ao carregar produtos:", error);
       }
     }
 
-    fetchDrivers();
+    fetchProducts();
   }, []);
-
-  const { drivers } = useDrivers();
 
   return (
     <MainTemplate>
@@ -125,9 +152,8 @@ export default function Home() {
                   <Card key={item.id} item={item} variant="featured" />
                 ))}
               </div>
-              <div
-                className={`grid grid-cols-2 md:grid-cols-2 flex flex-col gap-4`}
-              >
+
+              <div className="grid grid-cols-2 gap-4">
                 {news.slice(1).map((item) => (
                   <Card key={item.id} item={item} variant="news" />
                 ))}
@@ -139,42 +165,48 @@ export default function Home() {
 
       {/* Mais Informações */}
       <div className="flex flex-col gap-2 bg-navy">
+        {/* Tabela de Pilotos */}
         <section className="flex items-center">
-          <Container className="grid lg:grid-cols-3 gap-6 justify-around">
-            {/* Tabela de Pilotos */}
+          <Container className="grid gap-6 lg:grid-cols-3 justify-around">
             <Standings items={drivers} variant="standingsHome" />
+
             {/* Highlights */}
             <div className="flex flex-col">
-              <h2 className="font-bold text-3xl py-4">Ultima Corrida</h2>
+              <h2 className="py-4 text-3xl font-bold">Ultima Corrida</h2>
+
               <div className="flex items-end">
                 <div className="card overflow-hidden">
                   <img
                     src="/img/race-week.webp"
                     alt=""
-                    className="rounded-lg aspect-video object-cover hover:scale-[1.1] duration-[.3s]"
+                    className="aspect-video rounded-lg object-cover transition duration-[.3s] hover:scale-[1.1]"
                   />
                 </div>
               </div>
             </div>
+
             {/* Galeria de Fotos */}
             <div className="flex flex-col">
-              <h2 className="font-bold text-3xl py-4">Galeria de Fotos</h2>
+              <h2 className="py-4 text-3xl font-bold">Galeria de Fotos</h2>
+
               <div className="flex items-end">
                 <div className="card overflow-hidden">
                   <img
                     src="/img/galeria.webp"
                     alt=""
-                    className="rounded-lg aspect-video object-cover hover:scale-[1.1] duration-[.3s]"
+                    className="aspect-video rounded-lg object-cover transition duration-[.3s] hover:scale-[1.1]"
                   />
                 </div>
               </div>
             </div>
           </Container>
         </section>
+
         {/* Videos */}
-        <section className="">
+        <section>
           <Container>
             <Header title="Videos" />
+
             <div className="grid gap-4 md:grid-cols-[6fr_3fr_3fr]">
               {videos.map((item) => {
                 const videoId = new URL(item.url).searchParams.get("v");
@@ -184,7 +216,7 @@ export default function Home() {
                     key={item.id}
                     className="flex h-full flex-col overflow-hidden rounded-xl bg-zinc-950"
                   >
-                    <div className="flex aspect-video w-full h-80">
+                    <div className="flex h-80 w-full aspect-video">
                       <iframe
                         className="h-full w-full"
                         src={`https://www.youtube.com/embed/${videoId}`}
@@ -209,17 +241,19 @@ export default function Home() {
             </div>
           </Container>
         </section>
+
         {/* Pilotos */}
-        <section className="">
+        <section>
           <Container>
             <Header title="Pilotos" />
-            <div className="grid md:grid-cols-2 gap-6">
+
+            <div className="grid gap-6 md:grid-cols-2">
               {ngmDrivers.map((item) => (
-                <div className="flex w-full  overflow-hidden" key={item.id}>
+                <div className="flex w-full overflow-hidden" key={item.id}>
                   <img
                     src={item.wallpaper}
-                    className="w-full  object-cover"
-                    alt=""
+                    className="w-full object-cover"
+                    alt={item.name}
                   />
                 </div>
               ))}
@@ -227,18 +261,19 @@ export default function Home() {
           </Container>
         </section>
 
-        {/* Carro 2027  */}
-        <section className="md:min-h-[50svh]  bg-black">
+        {/* Carro 2027 */}
+        <section className="bg-black md:min-h-[50svh]">
           <Container className="flex flex-col">
-            <h2 className="text-center text-[25vw] lg:text-[18rem] font-bold">
+            <h2 className="text-center text-[25vw] font-bold lg:text-[18rem]">
               NGM27
             </h2>
+
             {car.map((item) => (
-              <div className="flex flex-col w-fuil h-full" key={item.id}>
+              <div className="flex h-full w-full flex-col" key={item.id}>
                 <img
                   src={item.image}
-                  alt=""
-                  className="block w-full max-w-270 mx-auto relative lg:top-[-150px]"
+                  alt={item.name}
+                  className="relative mx-auto block w-full max-w-270 lg:top-[-150px]"
                 />
               </div>
             ))}
@@ -246,54 +281,47 @@ export default function Home() {
         </section>
 
         {/* Shopping */}
-        <section className="">
+        <section>
           <Container className="flex flex-col gap-6">
             <Header title="Shopping" />
-            <div className="grid gap-4 grid-cols-2 md:grid-cols-4 md:gap-[2rem]">
-              {products
+
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-[2rem]">
+              {[...products]
                 .sort((a, b) => a.name.localeCompare(b.name))
                 .map((item) => (
-                  <div className="bg-zinc-950 p-2 rounded-2xl">
+                  <div key={item.id} className="rounded-2xl bg-zinc-950 p-2">
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="aspect-square object-cover w-full"
+                      className="aspect-square w-full object-cover"
                     />
+
                     <div className="p-2">
                       <h2 className="text-md text-zinc-200">{item.name}</h2>
-                      <p className="font-semibold  text-xl">
+
+                      <p className="text-xl font-semibold">
                         R$ <span>{item.price}</span>
                       </p>
                     </div>
                   </div>
                 ))}
             </div>
-            <Button variant="secondary" className="mt-4 max-w-fit mx-auto">
+
+            <Button variant="secondary" className="mx-auto mt-4 max-w-fit">
               Ver Todos Produtos
             </Button>
           </Container>
         </section>
       </div>
+
       {/* Parceiros */}
-      <section className="flex items-center min-h-[80svh] bg-zinc-950">
-        <Container className="">
-          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 md:gap-8 px-4">
+      <section className="flex min-h-[80svh] items-center bg-zinc-950">
+        <Container>
+          <div className="grid grid-cols-2 gap-4 px-4 md:gap-8 lg:grid-cols-4">
             <PartnerLogo />
           </div>
         </Container>
       </section>
-
-      {/* <section
-        className={`${styles.productsContainer} ${styles.shopProdutsContainer}`}
-      >
-        <div title="Em Breve - Loja Virtual">
-          <SwiperNav
-            sliderNumber={4}
-            spaceBetween={16}
-            sliderNumberMobile={1.1}
-          />
-        </div>
-      </section> */}
     </MainTemplate>
   );
 }

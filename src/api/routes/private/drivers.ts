@@ -1,9 +1,11 @@
 import express from "express";
 import type { Request, Response } from "express";
+
 import { prisma } from "../../lib/prisma";
 
 const router = express.Router();
 
+// Criar piloto
 router.post("/drivers", async (req: Request, res: Response) => {
   const { name, state, team, pts } = req.body;
 
@@ -19,7 +21,7 @@ router.post("/drivers", async (req: Request, res: Response) => {
         name,
         state,
         team,
-        pts: pts || 0,
+        pts: Number(pts) || 0,
       },
     });
 
@@ -29,6 +31,25 @@ router.post("/drivers", async (req: Request, res: Response) => {
 
     return res.status(500).json({
       error: "Erro ao criar piloto",
+    });
+  }
+});
+
+// Buscar pilotos
+router.get("/drivers", async (_req: Request, res: Response) => {
+  try {
+    const drivers = await prisma.drivers.findMany({
+      orderBy: {
+        points: "desc",
+      },
+    });
+
+    return res.status(200).json(drivers);
+  } catch (err) {
+    console.error(err);
+
+    return res.status(500).json({
+      error: "Erro ao buscar pilotos",
     });
   }
 });

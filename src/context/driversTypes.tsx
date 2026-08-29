@@ -3,7 +3,7 @@ export interface Drivers {
   name: string;
   state: string;
   team: string;
-  points: string;
+  points: number;
   createdAt: string;
   updatedAt: string;
 }
