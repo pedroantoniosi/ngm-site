@@ -76,7 +76,8 @@ async function main() {
       image: news.img,
       title: news.title,
       text: news.text,
-      url: news.url,
+      paragraphs: news.paragraphs,
+      slug: news.slug,
       tag: news.tag,
     })),
   });

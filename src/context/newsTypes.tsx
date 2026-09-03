@@ -3,6 +3,8 @@ export interface News {
   image: string;
   title: string;
   text: string;
+  paragraphs: string[];
+  slug: string;
   url: string;
   tag: string;
   createdAt: string;

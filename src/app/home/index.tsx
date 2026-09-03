@@ -23,10 +23,10 @@ interface VideoProps {
 const videos: VideoProps[] = [
   {
     id: 0,
-    title: "VRC Formula Alpha 2025 - Teaser",
+    title: "Prévia in-game do primeiro WIP do VRC Formula Alpha 2026",
     description:
-      "Conheça de perto todos os recursos avançados e o acabamento detalhado do novo Formula Alpha 2025. Confira tudo o que faz do carro deste ano o nosso lançamento mais imersivo até hoje.",
-    url: "https://www.youtube.com/watch?v=zVJh6Edcb4o",
+      "O VRC Formula Alpha 2026 vai para a pista em Zandvoort para uma volta rápida! Tenha uma prévia do que está por vir. Vamos analisar a telemetria mais de perto:",
+    url: "https://www.youtube.com/watch?v=ECF2QoxP_bs",
   },
   {
     id: 1,

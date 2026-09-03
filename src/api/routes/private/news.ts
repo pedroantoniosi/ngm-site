@@ -5,11 +5,11 @@ import { prisma } from "../../lib/prisma";
 const router = express.Router();
 
 router.post("/news", async (req: Request, res: Response) => {
-  const { image, title, text, url, tag } = req.body;
+  const { image, title, text, paragraphs, slug, url, tag } = req.body;
 
-  if (!image || !title || !text || !tag) {
+  if (!image || !title || !text || !paragraphs || !slug || !tag) {
     return res.status(400).json({
-      error: "img, title, text e tag são obrigatórios",
+      error: "image, title, text, paragraphs, slug e tag são obrigatórios",
     });
   }
 
@@ -19,6 +19,8 @@ router.post("/news", async (req: Request, res: Response) => {
         image,
         title,
         text,
+        paragraphs,
+        slug,
         url: url || "",
         tag,
       },
@@ -26,7 +28,7 @@ router.post("/news", async (req: Request, res: Response) => {
 
     return res.status(201).json(news);
   } catch (err) {
-    console.error(err);
+    console.error("Erro ao criar notícia:", err);
 
     return res.status(500).json({
       error: "Erro ao criar notícia",

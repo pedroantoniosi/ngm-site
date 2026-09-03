@@ -55,7 +55,7 @@ export default function NewsCard({
   return (
     <article className={styles.article}>
       {variant === "featured" && (
-        <div className="absolute inset-0 z-[9] bg-gradient-to-b from-transparent to-black/80" />
+        <div className="absolute inset-0 z-[9] bg-gradient-to-b from-transparent to-black/70" />
       )}
       <img src={item.image} alt={item.title} className={styles.image} />
 
