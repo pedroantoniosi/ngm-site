@@ -1,19 +1,18 @@
-import MainTemplate from "@/components/MainTemplate";
 import Container from "@/components/Container";
-import Card from "@/components/Card";
+import MainTemplate from "@/components/MainTemplate";
+import Shopping from "@/components/Shopping/index";
 
-export default function News() {
+export default function ShoppingPage() {
   return (
     <MainTemplate>
       <Container>
         <div className="flex flex-row py-6">
           <h2 className="text-4xl font-bold tracking-tighter uppercase">
-            Últimas Notícias
+            Shopping
           </h2>
         </div>
-
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <Card />
+        <div className="grid  sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <Shopping />
         </div>
       </Container>
     </MainTemplate>

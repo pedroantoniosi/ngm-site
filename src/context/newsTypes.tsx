@@ -5,7 +5,6 @@ export interface News {
   text: string;
   paragraphs: string[];
   slug: string;
-  url: string;
   tag: string;
   createdAt: string;
   updatedAt: string;

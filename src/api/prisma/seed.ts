@@ -18,23 +18,11 @@ const prisma = new PrismaClient({
 async function main() {
   console.log("🚀 Iniciando seed...");
 
-  //
-  // ===============================
-  // CLEAN DATABASE
-  // ===============================
-  //
-
   await prisma.drivers.deleteMany();
   await prisma.products.deleteMany();
   await prisma.news.deleteMany();
 
   console.log("🗑️ Dados antigos removidos");
-
-  //
-  // ===============================
-  // DRIVERS
-  // ===============================
-  //
 
   await prisma.drivers.createMany({
     data: rawDrivers.map((driver) => ({
@@ -45,14 +33,6 @@ async function main() {
     })),
   });
 
-  console.log("✅ Drivers enviados");
-
-  //
-  // ===============================
-  // PRODUCTS
-  // ===============================
-  //
-
   await prisma.products.createMany({
     data: rawProducts.map((product) => ({
       name: product.name,
@@ -62,14 +42,6 @@ async function main() {
       model: product.model,
     })),
   });
-
-  console.log("✅ Products enviados");
-
-  //
-  // ===============================
-  // NEWS
-  // ===============================
-  //
 
   await prisma.news.createMany({
     data: rawNews.map((news) => ({
@@ -82,31 +54,15 @@ async function main() {
     })),
   });
 
-  console.log("✅ News enviados");
-
-  //
-  // ===============================
-  // VALIDATION
-  // ===============================
-  //
-
-  const driversCount = await prisma.drivers.count();
-  const productsCount = await prisma.products.count();
-  const newsCount = await prisma.news.count();
-
-  console.log("📊 Dados no banco:");
-  console.log(`Drivers: ${driversCount}`);
-  console.log(`Products: ${productsCount}`);
-  console.log(`News: ${newsCount}`);
-
-  console.log("🎉 Banco populado com sucesso");
+  console.log(`✅ Drivers: ${rawDrivers.length}`);
+  console.log(`✅ Products: ${rawProducts.length}`);
+  console.log(`✅ News: ${rawNews.length}`);
 }
 
 main()
   .catch((error) => {
     console.error("❌ Erro no seed:");
     console.error(error);
-
     process.exit(1);
   })
   .finally(async () => {

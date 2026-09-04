@@ -8,9 +8,8 @@ import Header from "@/components/Header";
 import Button from "@/components/Button";
 
 // HOOKS
-import { useNews } from "@/hooks/useNews";
 import { useDrivers } from "@/hooks/useDrivers";
-import { useProducts } from "@/hooks/useProducts";
+import Shopping from "@/components/Shopping";
 
 // VIDEOS
 interface VideoProps {
@@ -86,9 +85,7 @@ const car = [
 ];
 
 export default function Home() {
-  const { news } = useNews();
   const { drivers } = useDrivers();
-  const { products } = useProducts();
 
   return (
     <MainTemplate>
@@ -98,16 +95,10 @@ export default function Home() {
           <div title="Ultimas Noticias">
             <div className="grid gap-6 md:grid-cols-2">
               <div>
-                {news.slice(0, 1).map((item) => (
-                  <Card key={item.id} item={item} variant="featured" />
-                ))}
+                <Card />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                {news.slice(1).map((item) => (
-                  <Card key={item.id} item={item} variant="news" />
-                ))}
-              </div>
+              <div className="grid grid-cols-2 gap-4"></div>
             </div>
           </div>
         </Container>
@@ -236,25 +227,7 @@ export default function Home() {
             <Header title="Shopping" />
 
             <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-[2rem]">
-              {products
-                .sort((a, b) => a.name.localeCompare(b.name))
-                .map((item) => (
-                  <div key={item.id} className="rounded-2xl bg-zinc-950 p-2">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="aspect-square w-full object-cover"
-                    />
-
-                    <div className="p-2">
-                      <h2 className="text-md text-zinc-200">{item.name}</h2>
-
-                      <p className="text-xl font-semibold">
-                        R$ {item.price.toFixed(2).replace(".", ",")}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+              <Shopping />
             </div>
 
             <Button variant="secondary" className="mx-auto mt-4 max-w-fit">

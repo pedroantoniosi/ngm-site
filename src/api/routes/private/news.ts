@@ -5,7 +5,7 @@ import { prisma } from "../../lib/prisma";
 const router = express.Router();
 
 router.post("/news", async (req: Request, res: Response) => {
-  const { image, title, text, paragraphs, slug, url, tag } = req.body;
+  const { image, title, text, paragraphs, slug, tag } = req.body;
 
   if (!image || !title || !text || !paragraphs || !slug || !tag) {
     return res.status(400).json({
@@ -21,7 +21,6 @@ router.post("/news", async (req: Request, res: Response) => {
         text,
         paragraphs,
         slug,
-        url: url || "",
         tag,
       },
     });

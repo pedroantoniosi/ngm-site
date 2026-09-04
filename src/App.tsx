@@ -1,5 +1,6 @@
 import Home from "./app/home";
 import News from "./app/news";
+import Shopping from "./app/shoppingPage";
 import Standings from "./app/standingsPage";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -11,6 +12,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/news" element={<News />} />
         <Route path="/standings" element={<Standings />} />
+        <Route path="/shopping" element={<Shopping />} />
       </Routes>
     </BrowserRouter>
   );
