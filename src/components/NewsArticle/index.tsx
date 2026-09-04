@@ -1,18 +1,5 @@
-import { Link } from "react-router-dom";
-
-interface News {
-  id: number;
-  img: string;
-  title: string;
-  text: string;
-  paragraphs: string[];
-  slug: string;
-  tag: string;
-}
-
-interface NewsArticleProps {
-  news: News;
-}
+import { Link, useParams } from "react-router-dom";
+import { useNews } from "@/hooks/useNews";
 
 const tagLabels: Record<string, string> = {
   noticias: "Notícias",
@@ -21,13 +8,27 @@ const tagLabels: Record<string, string> = {
   videos: "Vídeos",
 };
 
-export default function NewsArticle({ news }: NewsArticleProps) {
-  const tagLabel = tagLabels[news.tag] ?? news.tag;
+export default function NewsArticle() {
+  const { slug } = useParams<{ slug: string }>();
+  const { news } = useNews();
+
+  const article = news.find((item) => item.slug === slug);
+
+  if (!article) {
+    return (
+      <main className="flex min-h-[50vh] items-center justify-center">
+        <h1 className="text-2xl font-bold text-slate-950">
+          Notícia não encontrada
+        </h1>
+      </main>
+    );
+  }
+
+  const tagLabel = tagLabels[article.tag] ?? article.tag;
 
   return (
     <article className="w-full">
       <header className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
-        {/* Breadcrumb / voltar */}
         <Link
           to="/news"
           className="
@@ -45,7 +46,6 @@ export default function NewsArticle({ news }: NewsArticleProps) {
           Voltar para notícias
         </Link>
 
-        {/* Categoria */}
         <div className="mb-4">
           <span
             className="
@@ -58,7 +58,6 @@ export default function NewsArticle({ news }: NewsArticleProps) {
           </span>
         </div>
 
-        {/* Título */}
         <h1
           className="
             max-w-4xl
@@ -68,10 +67,9 @@ export default function NewsArticle({ news }: NewsArticleProps) {
             lg:leading-[1.1]
           "
         >
-          {news.title}
+          {article.title}
         </h1>
 
-        {/* Resumo */}
         <p
           className="
             mt-6 max-w-3xl
@@ -79,15 +77,14 @@ export default function NewsArticle({ news }: NewsArticleProps) {
             sm:text-xl
           "
         >
-          {news.text}
+          {article.text}
         </p>
       </header>
 
-      {/* Imagem principal */}
       <figure className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <img
-          src={news.img}
-          alt={`Imagem relacionada à notícia: ${news.title}`}
+          src={article.image}
+          alt={`Imagem relacionada à notícia: ${article.title}`}
           className="
             aspect-video w-full
             rounded-xl object-cover
@@ -96,7 +93,6 @@ export default function NewsArticle({ news }: NewsArticleProps) {
         />
       </figure>
 
-      {/* Conteúdo */}
       <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8 sm:py-14">
         <div
           className="
@@ -105,9 +101,9 @@ export default function NewsArticle({ news }: NewsArticleProps) {
             sm:text-lg sm:leading-9
           "
         >
-          {news.paragraphs.map((paragraph, index) => (
+          {article.paragraphs?.map((paragraph, index) => (
             <p
-              key={`${news.id}-paragraph-${index}`}
+              key={`${article.id}-paragraph-${index}`}
               className={index > 0 ? "mt-6" : ""}
             >
               {paragraph}
@@ -115,7 +111,6 @@ export default function NewsArticle({ news }: NewsArticleProps) {
           ))}
         </div>
 
-        {/* Retorno */}
         <div className="mt-12 border-t border-slate-200 pt-8">
           <Link
             to="/news"

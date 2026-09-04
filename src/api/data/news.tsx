@@ -12,7 +12,7 @@ const rawNews = [
       "A apresentação completa do Formula Alpha 2026 acontecerá em breve, quando serão divulgadas novas informações técnicas, imagens oficiais e detalhes sobre o calendário da próxima temporada.",
     ],
     slug: "primeiras-imagens-vrc-formula-alpha-2026",
-    tag: "videos",
+    tag: "imagen",
   },
 
   {

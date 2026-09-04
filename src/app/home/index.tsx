@@ -10,6 +10,7 @@ import Button from "@/components/Button";
 // HOOKS
 import { useDrivers } from "@/hooks/useDrivers";
 import Shopping from "@/components/Shopping";
+import { Link } from "react-router-dom";
 
 // VIDEOS
 interface VideoProps {
@@ -93,13 +94,7 @@ export default function Home() {
       <section>
         <Container>
           <div title="Ultimas Noticias">
-            <div className="grid gap-6 md:grid-cols-2">
-              <div>
-                <Card />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4"></div>
-            </div>
+            <Card variant="home" />
           </div>
         </Container>
       </section>
@@ -109,7 +104,12 @@ export default function Home() {
         {/* Tabela de Pilotos */}
         <section className="flex items-center">
           <Container className="grid gap-6 lg:grid-cols-3 justify-around">
-            <Standings items={drivers} variant="standingsHome" />
+            <div>
+              <Standings items={drivers} variant="standingsHome" />
+              <Link to="/standings" className="block flex justify-center py-4">
+                <Button variant="secondary">Ver Classficação</Button>
+              </Link>
+            </div>
 
             {/* Highlights */}
             <div className="flex flex-col">
@@ -128,7 +128,7 @@ export default function Home() {
 
             {/* Galeria de Fotos */}
             <div className="flex flex-col">
-              <h2 className="py-4 text-3xl font-bold">Galeria de Fotos</h2>
+              <h2 className="py-4 text-3xl font-bold">Wallpapers</h2>
 
               <div className="flex items-end">
                 <div className="card overflow-hidden">
